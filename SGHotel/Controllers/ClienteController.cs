@@ -28,7 +28,6 @@ namespace SGHotel.Controllers
             return View();
         }
 
-
         public ActionResult Editar(int id)
         {
             ClienteModel cliente = _clienteRepositorio.ListarPorId(id);

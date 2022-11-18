@@ -1,0 +1,45 @@
+﻿@using SGHotel.Enums
+@model QuartoModel
+@{
+    ViewData["Title"] = "Criar Quarto";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Criar Quarto</h1> 
+
+</div>
+
+<form asp-controller="Quarto" asp-action="Adicionar" method="post">
+ 
+  <input type="hidden" asp-for="Id_Quarto"/> 
+    
+   <div class="form-group">
+    <label for="Num_quarto">Número do quarto</label>
+    <input type="text" asp-for="Num_quarto" class="form-control" placeholder="Digite o Numero do quarto">    
+    @Html.ValidationMessageFor(x => x.Num_quarto)
+  </div>
+
+  <div class="form-group">
+    <label for="Id_Andar">Andar do quarto</label>
+    <input type="text" asp-for="Id_Andar" class="form-control" placeholder="Digite o andar do quarto">    
+    @Html.ValidationMessageFor(x => x.Id_Andar)
+  </div> 
+
+   <div class="form-group">
+    <label for="Capacidade">Capacidade</label>
+    <input type="text" asp-for="Capacidade" class="form-control" placeholder="Digite a capacidade do quarto">    
+    @Html.ValidationMessageFor(x => x.Capacidade)
+  </div> 
+
+   <div class="form-group">
+    <label for="Preco">Valor da diária</label>
+    <input type="number" asp-for="Preco" class="form-control" placeholder="Digite o preco do quarto">    
+    @Html.ValidationMessageFor(x => x.Preco)
+  </div>  
+
+  <br />
+  
+  <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Salvar</button>
+  <a class="btn btn-secondary btn-block" asp-controller="Quarto" asp-action="Criar" role="button" >Cancelar</a>
+</form>

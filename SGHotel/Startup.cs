@@ -31,6 +31,8 @@ namespace SGHotel
                .AddDbContext<BancoContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+            services.AddScoped<IAndarRepositorio, AndarRepositorio>();
+            services.AddScoped<IQuartoRepositorio, QuartoRepositorio>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SGHotel.Models.Data;
 
 namespace SGHotel.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    partial class BancoContextModelSnapshot : ModelSnapshot
+    [Migration("20221118141611_tabela andar")]
+    partial class tabelaandar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,33 +57,6 @@ namespace SGHotel.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clientes");
-                });
-
-            modelBuilder.Entity("SGHotel.Models.QuartoModel", b =>
-                {
-                    b.Property<int>("Id_Quarto")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Capacidade")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id_Andar")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Limpo")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Num_quarto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Preco")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id_Quarto");
-
-                    b.ToTable("Quartos");
                 });
 
             modelBuilder.Entity("SGHotel.Models.UsuarioModel", b =>
