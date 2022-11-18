@@ -1,0 +1,33 @@
+﻿@using SGHotel.Enums
+@model ClienteModel
+@{
+    ViewData["Title"] = "Criar Cliente";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Editar Cliente</h1> 
+
+</div>
+
+<form asp-controller="Cliente" asp-action="Criar" method="post">
+ 
+  <input type="hidden" asp-for="Id"/> 
+    
+   <div class="form-group">
+    <label for="Nome">Nome</label>
+    <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o Nome do cliente">    
+    @Html.ValidationMessageFor(x => x.Nome)
+  </div>
+
+  <div class="form-group">
+    <label for="Cpf">Cpf</label>
+    <input type="text" asp-for="Cpf" class="form-control" placeholder="Digite o Cpf do cliente">    
+    @Html.ValidationMessageFor(x => x.Cpf)
+  </div> 
+
+  <br />
+  
+  <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Salvar</button>
+  <a class="btn btn-secondary btn-block" asp-controller="Cliente" asp-action="Index" role="button" >Voltar</a>
+</form>

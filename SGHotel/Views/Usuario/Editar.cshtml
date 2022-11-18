@@ -1,0 +1,51 @@
+﻿@using SGHotel.Enums
+@model UsuarioModel
+@{
+    ViewData["Title"] = "Editar usuario";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Editar usuario</h1> 
+
+</div>
+
+<form asp-controller="Usuario" asp-action="Alterar" method="post">
+ 
+  <input type="hidden" asp-for="Id"/> 
+    
+   <div class="form-group">
+    <label for="Nome">Nome</label>
+    <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o Nome do usuario">    
+    @Html.ValidationMessageFor(x => x.Nome)
+  </div>
+
+  <div class="form-group">
+    <label for="Email">Email</label>
+    <input type="text" asp-for="Email" class="form-control" placeholder="Digite o Email do usuario">    
+    @Html.ValidationMessageFor(x => x.Email)
+  </div>
+  
+  <div class="form-group">
+    <label for="Email">Login</label>
+    <input type="text" asp-for="Login" class="form-control" placeholder="Digite o Login do usuario">    
+    @Html.ValidationMessageFor(x => x.Login)
+  </div>
+  
+  <div class="form-group">
+    <label for="celular">Perfil</label>    
+    <select asp-for="Perfil" class="form-control">
+        <option value="">Selecione</option>
+        <option value="@PerfilEnum.Admin">Administrador</option>
+        <option value="@PerfilEnum.Recepcionista ">Recepcionista</option>
+        <option value="@PerfilEnum.Servicos_Gerais ">Servicos Gerais</option>
+        <option value="@PerfilEnum.Financeiro ">Financeiro</option>
+    </select>
+    @Html.ValidationMessageFor(x => x.Perfil)
+  </div>
+
+  <br />
+  
+  <button type="submit" class="btn btn-primary btn-block">Alterar</button>
+  <a class="btn btn-secondary btn-block" asp-controller="Usuario" asp-action="index" role="button" >Voltar</a>
+</form>
