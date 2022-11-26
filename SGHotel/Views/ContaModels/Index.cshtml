@@ -1,0 +1,105 @@
+﻿@model IEnumerable<ContaModel>
+@using SGHotel.Enums
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Gestão Financeira</h1>
+
+<p>
+    <a class="btn btn-primary" role="button" asp-action="Create">Adicionar nova Conta</a>
+    
+</p>
+<table class="table table-striped" style="width:100%" id="Tabela-Usuarios">
+    <thead>
+        <tr>
+            <th>
+                Descrição
+            </th>
+            <th>
+                Valor
+            </th>
+            <th>
+                Data Lançamento
+            </th>
+            <th>
+                Data Vencimento
+            </th>
+            <th>
+                Tipo
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor_Conta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dt_lancamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dt_vencimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tp_conta)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdConta">Editar</a> |
+                @*<a asp-action="Details" asp-route-id="@item.IdConta">Details</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.IdConta">Deletar</a>
+            </td>
+        </tr>
+        
+}
+    </tbody>
+</table>
+
+<br />
+<br />
+
+@{
+    var last = Model.Last();
+    double Pagar = 0 , receber = 0, total = 0, vencida = 0, cancelada = 0;
+    DateTime hoje = DateTime.Now;
+
+    foreach (var item in Model)
+    {
+        if (item.tp_conta.Contains("Receber"))
+        {
+            receber = receber + item.Valor_Conta;
+        }
+        else if (item.tp_conta.Contains("Pagar"))
+        {
+            Pagar = Pagar + item.Valor_Conta;
+        } 
+        else if (item.tp_conta.Contains("Cancelada"))
+        {
+            cancelada = cancelada + item.Valor_Conta;
+        }          
+
+        if (hoje > item.dt_vencimento)
+        {
+            vencida = vencida + item.Valor_Conta;            
+        }
+                     
+        total = total + item.Valor_Conta;
+    }
+
+    string receber_txt = receber.ToString();
+    string pagar_txt = Pagar.ToString();
+    string Total_txt = total.ToString();
+    string Vencida_txt = vencida.ToString();
+    string Cancelada_txt = cancelada.ToString();
+}
+
+<label>Total a receber:</label>
+<input type="text" value="@receber_txt" step=".01"  disabled="disabled" style="background-color:green; color:white; text-align:center"> <label>Total a pagar:</label> <input value="@pagar_txt" style="background-color:#CB4335; color:white; text-align:center"  disabled="disabled"> <label>Total:</label> <input  value="@Total_txt" disabled="disabled"> <br />
+<br />
+<label>Vencidas: </label>
+<input value="@Vencida_txt" style="background-color:#CB4335; color:white; text-align:center; margin-left:42px" disabled="disabled" > <label>Canceladas: </label><input value="@cancelada" style="background-color:#CB4335; color:white; text-align:center;margin-left:18px"  disabled="disabled"> 

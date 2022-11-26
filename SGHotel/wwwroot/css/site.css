@@ -84,3 +84,9 @@ body {
 .container {
     padding: 2px 16px;
 }
+
+
+#Campo-Red {
+    background-color: #DC2A04;
+    color: white;   
+}

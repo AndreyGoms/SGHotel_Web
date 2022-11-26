@@ -12,5 +12,6 @@ namespace SGHotel.Models.Data
         public DbSet<ClienteModel> Clientes { get; set; }
         public DbSet<QuartoModel> Quartos { get; set; }
         public DbSet<AndarModel> Andares    { get; set; }
+        public DbSet<ContaModel> Contas { get; set; }
     }
 }

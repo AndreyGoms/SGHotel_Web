@@ -16,8 +16,8 @@ body {
     color: #fff;
     background: #222222;
     background: #16222A; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #16222A, #3A6073); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #16222A, #3A6073); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to top, #ffffff, #7e7e7e); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #ffffff, #7e7e7e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .container {

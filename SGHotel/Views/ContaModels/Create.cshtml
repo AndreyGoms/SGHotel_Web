@@ -1,0 +1,56 @@
+﻿@using SGHotel.Enums
+@model ContaModel
+@{
+    ViewData["Title"] = "Criar Conta";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Criar Conta</h1> 
+
+</div>
+
+<form asp-controller="ContaModels" asp-action="Create" method="post">
+ 
+  <input type="hidden" asp-for="IdConta"/> 
+    
+   <div class="form-group">
+    <label for="Descricao">Descrição</label>
+    <input type="text" asp-for="Descricao" class="form-control" placeholder="Digite o Descrição da Conta">    
+    @Html.ValidationMessageFor(x => x.Descricao)
+  </div>
+
+   <div class="form-group">
+    <label for="Preco">Valor da Conta</label>
+    <input type="Valor_Conta" asp-for="Valor_Conta" class="form-control" placeholder="Digite o Valor da conta">    
+    @Html.ValidationMessageFor(x => x.Valor_Conta)
+  </div>  
+
+  <div class="form-group">
+    <label for="dt_lancamento">Data de lançamento</label>
+    <input type="date" asp-for="dt_lancamento" class="form-control" placeholder="Digite a data de lançamento da conta">    
+    @Html.ValidationMessageFor(x => x.dt_lancamento)
+  </div> 
+
+  <div class="form-group">
+    <label for="dt_vencimento">Data de Vencimento</label>
+    <input type="date" asp-for="dt_vencimento" class="form-control" placeholder="Digite a data de vencimento da conta">    
+    @Html.ValidationMessageFor(x => x.dt_vencimento)
+  </div> 
+
+  <div class="form-group">
+    <label for="tp_conta">Tipo da Conta</label>    
+    <select asp-for="tp_conta" class="form-control">
+        <option value="">Selecione</option>
+        <option value="@TipoContaEnum.Receber">Receber</option>
+        <option value="@TipoContaEnum.Pagar">Pagar</option>
+        <option value="@TipoContaEnum.Cancelada">Cancelada</option>
+    </select>
+    @Html.ValidationMessageFor(x => x.tp_conta)
+  </div>
+
+  <br />
+  
+  <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Salvar</button>
+  <a class="btn btn-secondary btn-block" asp-controller="ContaModels" asp-action="Index" role="button" >Cancelar</a>
+</form>
