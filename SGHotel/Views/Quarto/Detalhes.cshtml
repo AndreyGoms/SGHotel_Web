@@ -1,0 +1,36 @@
+﻿@model SGHotel.Models.QuartoModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Quarto @Model.Num_quarto</h1>
+
+<div>  
+    <hr />
+    <dl class="column">
+        <dt class = "col-sm-10">
+            @if (Model.Disponivel)
+            {
+                <label style="color:green">QUARTO DISPONIVEL</label><br />
+            }else
+            {
+                <label style="color:red">QUARTO OCUPADO</label><br />
+            }
+        </dt>
+        <dt class = "col-sm-2">                        
+            <label>Capacidade:</label>  <label>@Html.DisplayFor(model => model.Capacidade)</label>   
+        </dt>
+        <dt class = "col-sm-10">
+            @{
+                string preco = Model.Preco.ToString();
+            }
+
+            <label>Valor da diária: R$@preco</label>
+        </dt>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-controller="Quarto" asp-action="Editar" asp-route-id="@Model.Id_Quarto">Editar</a> |
+    <a asp-controller="Home" asp-action="Index">Voltar</a>
+</div>
+

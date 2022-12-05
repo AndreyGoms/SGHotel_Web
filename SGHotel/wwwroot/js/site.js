@@ -47,12 +47,14 @@ function getDatatable(id) {
 
 $("#btnSalvarEdicao").on("click", "[type='checkbox']", function (e) {
     if (this.checked) {
-        $(this).attr("value", "true");
+        $(e).attr("value", "true");
     } else {
-        $(this).attr("value", "false");
+        $(e).attr("value", "false");
     }
 });
 
 
-
+$('#exampleModal').on('shown.bs.modal', function () {
+    $('#meuInput').trigger('focus')
+})
 

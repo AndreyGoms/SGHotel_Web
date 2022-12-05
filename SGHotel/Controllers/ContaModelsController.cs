@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SGHotel.Enums;
 using SGHotel.Models;
 using SGHotel.Models.Data;
 
@@ -148,6 +149,19 @@ namespace SGHotel.Controllers
         private bool ContaModelExists(int id)
         {
             return _context.Contas.Any(e => e.IdConta == id);
+        }
+
+
+        public IActionResult CancelarConta(int id)
+        {
+            var conta_cancelada = _context.Contas.FirstOrDefault(e => e.IdConta == id);
+
+            conta_cancelada.tp_conta = "Cancelada";
+
+            _context.Contas.Update(conta_cancelada);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "ContaModels");            
         }
 
     }

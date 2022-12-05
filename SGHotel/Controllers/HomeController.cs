@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SGHotel.Models;
+using SGHotel.Repositorio;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -10,14 +12,19 @@ namespace SGHotel.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IQuartoRepositorio _quartoRepositorio;
+        public HomeController(ILogger<HomeController> logger, IQuartoRepositorio quartoRepositorio)
         {
             _logger = logger;
+            _quartoRepositorio = quartoRepositorio;
         }
 
         public IActionResult Index()
         {
-            return View();
+
+            List<QuartoModel> quartos = _quartoRepositorio.BuscaTodos();
+
+            return View(quartos);
         }
 
         public IActionResult Privacy()

@@ -27,6 +27,7 @@ namespace SGHotel.Repositorio
         public QuartoModel Adicionar(QuartoModel quarto)
         {
             quarto.Limpo = true;
+            quarto.Disponivel = true;
             _context.Quartos.Add(quarto);   
             _context.SaveChanges();
             return quarto;
@@ -43,7 +44,9 @@ namespace SGHotel.Repositorio
             quarto_editado.Num_quarto = quarto.Num_quarto;
             quarto_editado.Id_Andar = quarto.Id_Andar;
             quarto_editado.Capacidade = quarto.Capacidade;
-            quarto_editado.Limpo = quarto.Limpo;
+            quarto_editado.Preco = quarto.Preco;
+            //quarto_editado.Limpo = quarto.Limpo;
+            //quarto_editado.Disponivel= quarto.Disponivel;
 
             _context.Quartos.Update(quarto_editado);
             _context.SaveChanges();

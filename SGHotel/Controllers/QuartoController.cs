@@ -21,6 +21,12 @@ namespace SGHotel.Controllers
             return View();
         }
 
+        public ActionResult Detalhes(int id)
+        {
+            QuartoModel quarto = _quartoRepositorio.ListarPorId(id);
+
+            return View(quarto);
+        }
 
         public ActionResult Editar(int id)
         {
@@ -52,6 +58,16 @@ namespace SGHotel.Controllers
                 return RedirectToAction("Criar");
             }
 
+        }
+
+
+        [HttpPost]
+        public ActionResult Editar(QuartoModel quartoEditado)
+        {
+            
+            var result =  _quartoRepositorio.Atualizar(quartoEditado);
+
+            return RedirectToAction("Index","Home");
         }
 
     }
