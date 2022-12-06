@@ -34,6 +34,7 @@ namespace SGHotel
             services.AddScoped<IAndarRepositorio, AndarRepositorio>();
             services.AddScoped<IQuartoRepositorio, QuartoRepositorio>();            
             services.AddScoped<IContaRepositorio, ContaRepositorio>();            
+            services.AddScoped<IReservaRespositorio, ReservaRepositorio>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

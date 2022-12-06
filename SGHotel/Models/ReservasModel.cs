@@ -7,9 +7,9 @@ namespace SGHotel.Models
     {
         [Key]
         public int id_Reserva { get; set; }
-        DateTime dt_inicio { get; set; }
-        DateTime dt_fim { get; set; }
-        int id_cliente { get; set; }
-        int id_quarto { get; set; }
+        public DateTime dt_inicio { get; set; }
+        public DateTime dt_fim { get; set; }
+        public int id_cliente { get; set; }
+        public int id_quarto { get; set; }
     }
 }
