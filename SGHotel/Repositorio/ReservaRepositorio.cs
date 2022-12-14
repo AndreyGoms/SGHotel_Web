@@ -28,6 +28,16 @@ namespace SGHotel.Repositorio
             return _Context.Reservas.ToList();
         }
 
+
+        public List<ReservasModel> BuscarReservas(int id_quarto)
+        {
+
+            List<ReservasModel> reservas_do_quarto = _Context.Reservas.Where(x => x.id_quarto == id_quarto).ToList(); 
+
+            return reservas_do_quarto;
+        }
+
+
         public ReservasModel ListarPorId(int id)
         {
             ReservasModel reserva = _Context.Reservas.Where(x => x.id_Reserva == id).FirstOrDefault();

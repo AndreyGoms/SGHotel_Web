@@ -49,10 +49,15 @@ namespace SGHotel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("QuartoModelId_Quarto")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("QuartoModelId_Quarto");
 
                     b.ToTable("Clientes");
                 });
@@ -121,6 +126,12 @@ namespace SGHotel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("QuartoModelId_Quarto")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Valor_pago")
+                        .HasColumnType("float");
+
                     b.Property<DateTime>("dt_fim")
                         .HasColumnType("datetime2");
 
@@ -134,6 +145,8 @@ namespace SGHotel.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("id_Reserva");
+
+                    b.HasIndex("QuartoModelId_Quarto");
 
                     b.ToTable("Reservas");
                 });
@@ -173,6 +186,27 @@ namespace SGHotel.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("SGHotel.Models.ClienteModel", b =>
+                {
+                    b.HasOne("SGHotel.Models.QuartoModel", null)
+                        .WithMany("Clientes")
+                        .HasForeignKey("QuartoModelId_Quarto");
+                });
+
+            modelBuilder.Entity("SGHotel.Models.ReservasModel", b =>
+                {
+                    b.HasOne("SGHotel.Models.QuartoModel", null)
+                        .WithMany("reservas")
+                        .HasForeignKey("QuartoModelId_Quarto");
+                });
+
+            modelBuilder.Entity("SGHotel.Models.QuartoModel", b =>
+                {
+                    b.Navigation("Clientes");
+
+                    b.Navigation("reservas");
                 });
 #pragma warning restore 612, 618
         }

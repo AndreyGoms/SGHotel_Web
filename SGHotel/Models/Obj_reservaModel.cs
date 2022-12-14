@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SGHotel.Models
 {
-    public class ReservasModel
-    {
-        [Key]
-        public int id_Reserva { get; set; }
+    public class Obj_reservaModel
+    {                
         public DateTime dt_inicio { get; set; }
         public DateTime dt_fim { get; set; }
         public int id_cliente { get; set; }
         public int id_quarto { get; set; }
-        public double Valor_pago { get; set; }
     }
 }

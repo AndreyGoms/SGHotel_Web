@@ -24,6 +24,36 @@ namespace SGHotel.Repositorio
             return _context.Quartos.ToList();
         }
 
+        public bool Atualiza_Status(QuartoModel quarto)
+        {
+            QuartoModel quarto_editado = ListarPorId(quarto.Id_Quarto);
+
+            if (quarto_editado == null)
+                throw new Exception("Quarto não encontrado");
+
+            quarto_editado.Num_quarto = quarto.Num_quarto;
+            quarto_editado.Id_Andar = quarto.Id_Andar;
+            quarto_editado.Capacidade = quarto.Capacidade;
+            quarto_editado.Preco = quarto.Preco;
+            
+            if (quarto_editado.Disponivel != true)
+            {
+                quarto_editado.Disponivel= quarto.Disponivel = true;
+                quarto_editado.Limpo = quarto.Limpo = false;
+            }
+            else
+            {
+                quarto_editado.Disponivel = false;
+            }
+            
+
+            
+            _context.Quartos.Update(quarto_editado);
+            _context.SaveChanges();
+
+            return true;
+        }
+
         public QuartoModel Adicionar(QuartoModel quarto)
         {
             quarto.Limpo = true;

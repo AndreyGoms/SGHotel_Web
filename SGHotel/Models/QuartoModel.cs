@@ -12,7 +12,9 @@ namespace SGHotel.Models
         public int Capacidade { get; set; }
         public int Id_Andar { get; set; }
         public bool Limpo { get; set; }        
-        public bool Disponivel { get; set; }
-        List<ReservasModel> reservas { get; set; }
+        public bool Disponivel { get; set; }       
+        //public Obj_reservaModel? reserva { get; set; }
+        public List<ClienteModel> Clientes { get; set; }
+        public List<ReservasModel> reservas { get; set; }
     }
 }

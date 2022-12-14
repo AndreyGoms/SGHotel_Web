@@ -6,7 +6,7 @@
 
 <div class="text-center">
 
-    <h1 class="display-4">Criar Quarto</h1> 
+    <h1 class="display-4">Editar Quarto</h1> 
 
 </div>
 
@@ -41,5 +41,5 @@
   <br />
   
   <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Salvar</button>
-  <a class="btn btn-secondary btn-block" asp-controller="Home" asp-action="Index" role="button" >Cancelar</a>
+  <a class="btn btn-secondary btn-block" asp-controller="Quarto" asp-action="Detalhes" asp-route-id="@Model.Id_Quarto" role="button" >Cancelar</a>
 </form>

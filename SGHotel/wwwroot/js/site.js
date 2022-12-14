@@ -6,6 +6,15 @@ $(document).ready(function () {
     getDatatable('#Tabela-Contatos');
     getDatatable('#Tabela-Usuarios');
     getDatatable('#Tabela-Clientes');
+
+    $('.botao-modal').click(function () {
+        $('#modal-reserva').modal();
+    });
+
+    //$('#btn-checkin').click(function () {
+    //    $('.modal fade').modal();
+    //});
+
 });
 
 //$(document).ready(function () {
@@ -55,6 +64,10 @@ $("#btnSalvarEdicao").on("click", "[type='checkbox']", function (e) {
 
 
 $('#exampleModal').on('shown.bs.modal', function () {
+    $('#meuInput').trigger('focus')
+})
+
+$('#modal-reservas-lista').on('shown.bs.modal', function () {
     $('#meuInput').trigger('focus')
 })
 

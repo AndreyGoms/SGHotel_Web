@@ -10,8 +10,8 @@ using SGHotel.Models.Data;
 namespace SGHotel.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    [Migration("20221118173317_Quartos")]
-    partial class Quartos
+    [Migration("20221208035217_att tabela reserva")]
+    partial class atttabelareserva
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,12 +51,44 @@ namespace SGHotel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("QuartoModelId_Quarto")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("QuartoModelId_Quarto");
+
                     b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("SGHotel.Models.ContaModel", b =>
+                {
+                    b.Property<int>("IdConta")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Valor_Conta")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("dt_lancamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("dt_vencimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("tp_conta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdConta");
+
+                    b.ToTable("Contas");
                 });
 
             modelBuilder.Entity("SGHotel.Models.QuartoModel", b =>
@@ -68,6 +100,9 @@ namespace SGHotel.Migrations
 
                     b.Property<int>("Capacidade")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Disponivel")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Id_Andar")
                         .HasColumnType("int");
@@ -84,6 +119,38 @@ namespace SGHotel.Migrations
                     b.HasKey("Id_Quarto");
 
                     b.ToTable("Quartos");
+                });
+
+            modelBuilder.Entity("SGHotel.Models.ReservasModel", b =>
+                {
+                    b.Property<int>("id_Reserva")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("QuartoModelId_Quarto")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Valor_pago")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("dt_fim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("dt_inicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("id_cliente")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id_quarto")
+                        .HasColumnType("int");
+
+                    b.HasKey("id_Reserva");
+
+                    b.HasIndex("QuartoModelId_Quarto");
+
+                    b.ToTable("Reservas");
                 });
 
             modelBuilder.Entity("SGHotel.Models.UsuarioModel", b =>
@@ -121,6 +188,27 @@ namespace SGHotel.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("SGHotel.Models.ClienteModel", b =>
+                {
+                    b.HasOne("SGHotel.Models.QuartoModel", null)
+                        .WithMany("Clientes")
+                        .HasForeignKey("QuartoModelId_Quarto");
+                });
+
+            modelBuilder.Entity("SGHotel.Models.ReservasModel", b =>
+                {
+                    b.HasOne("SGHotel.Models.QuartoModel", null)
+                        .WithMany("reservas")
+                        .HasForeignKey("QuartoModelId_Quarto");
+                });
+
+            modelBuilder.Entity("SGHotel.Models.QuartoModel", b =>
+                {
+                    b.Navigation("Clientes");
+
+                    b.Navigation("reservas");
                 });
 #pragma warning restore 612, 618
         }

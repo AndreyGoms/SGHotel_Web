@@ -7,6 +7,7 @@ namespace SGHotel.Repositorio
     {
         ReservasModel ListarPorId(int id);
         List<ReservasModel> BuscarTodos();
+        List<ReservasModel> BuscarReservas(int id_quarto);
         ReservasModel Adicionar(ReservasModel reserva);
         ReservasModel Atualizar(ReservasModel reserva);
         bool Apagar(int id);
