@@ -9,6 +9,12 @@
 
 <h1>Quarto @Model.Num_quarto</h1>
 
+<style>
+    a {
+        text-decoration:none;
+    }
+</style>
+
 <div style="display:inline-flex">  
     <hr />
     <dl class="column">
@@ -83,39 +89,35 @@
                 foreach(ReservasModel reserva_item in Model.reservas)
                 {
                     <tr>                          
-                        <td>@reserva_item.id_Reserva</td>
-                        <td>@reserva_item.dt_inicio</td>
-                        <td>@reserva_item.dt_fim</td>
-                                                                      
-                        @foreach(ClienteModel cliente in Model.Clientes)
+                         <td>@reserva_item.id_Reserva</td>
+                         <td>@reserva_item.dt_inicio</td>
+                         <td>@reserva_item.dt_fim</td>
+                                                                              
+                          @foreach(ClienteModel cliente in Model.Clientes)
                          {
                             if(cliente.Id == reserva_item.id_cliente)
                             {
-                                    <td>@cliente.Nome</td>                               
+                                <td>@cliente.Nome</td>                               
                             } 
                          }                                        
                         <td>
                             <div class="btn-group" role="group">
                                 <a role="button" class="btn btn-primary" asp-route-id="" asp-controller="Cliente" asp-action="Editar" >Editar</a>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalApagar">
+                                <a role="button" class="btn btn-primary" asp-route-id="id_reserva=@reserva_item.id_Reserva" asp-controller="Quarto" asp-action="ApagarConfirmacao">
                                         Apagar
-                                </button>         
-                                @using (Html.BeginForm("ApagarConfirmacao", "Quarto"))
-                                {                                                                                
-                                    //<input type="hidden" value="@reserva_item.id_Reserva"/>              
-                                     @Html.TextBox("id_reserva",@reserva_item.id_Reserva)
-
-                                    <a role="button" class="btn btn-primary" asp-route-id="@reserva_item.id_Reserva" asp-controller="Quarto" asp-action="ApagarConfirmacao">
-                                            SOCORRO
-                                    </a>                                                                        
-                                }
+                                </a>       
+                                
+                                <button class="btn btn-danger">
+                                   @Html.ActionLink("Apagar","ApagarConfirmacao", new { id_reserva=@reserva_item.id_Reserva })
+                                </button>                               
+                                                                        
                                 @if (Model.Disponivel)
                                 {
-                                        <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Check-In</button>
+                                                <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Check-In</button>
                                 }
                                 else if (!Model.Disponivel)
                                 {
-                                        <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Check-Out</button>                                                                            
+                                                <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Check-Out</button>                                                                            
                                 }
                             </div>
                         </td>                       
@@ -149,7 +151,7 @@
                         @{
                             foreach (var item in Model.Clientes)
                             {                                                          
-                                                   <option value="@item.Id">@item.Nome</option>                                                                    
+                                                           <option value="@item.Id">@item.Nome</option>                                                                    
                             }                            
                         }
                     </select>            

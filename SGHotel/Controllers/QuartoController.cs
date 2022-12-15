@@ -54,14 +54,14 @@ namespace SGHotel.Controllers
             return View(quarto);
         }
 
-        //metodos     
         public ActionResult ApagarConfirmacao(int id_reserva)
         {
             ReservasModel reserva_localizada = _reservaRepositorio.ListarPorId(id_reserva);
 
-            return RedirectToAction("ApagarConfirmacao","Reservas",reserva_localizada);
+            return View(reserva_localizada);
         }
 
+        //metodos     
         [HttpPost]
         public ActionResult Adicionar(QuartoModel quarto)
         {

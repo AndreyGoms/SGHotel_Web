@@ -1,19 +1,26 @@
-﻿@model SGHotel.Models.ReservasModel
+﻿@model ReservasModel
 @{
     ViewData["Title"] = "Confirmação de apagar o Usuario";
 }
+<style>
+    .dados{
+        font:bold;
+    }
+</style>
 
 <div class="text-center">
     <h1>ATENÇÃO</h1>
-    <label> Caso <strong>SIM</strong>, esse registro será apagado e a conta referente a ela será Cancelada!</label>
+    <label> Caso <strong>CONFIRME</strong>, esse registro será apagado e a conta referente a ela será Cancelada!</label>
 </div>
-<div>
+<div>    
     <h2>Dados da reserva</h2>
-    <label>Data da Inicio: @Model.dt_inicio</label>
-    <label>Data da Saída : @Model.dt_fim</label>
-    <label>cliente       : @Model.id_cliente</label>
-    <label>Valor pago    : @Model.Valor_pago</label>
+    <strong>
+        <label class="dados">Data da Inicio: @Model.dt_inicio.ToShortDateString()</label><br>
+        <label class="dados">Data da Saída : @Model.dt_fim.ToShortDateString()</label><br>
+        <label class="dados">cliente       : @Model.id_cliente</label><br>
+        <label class="dados">Valor pago    : @Model.Valor_pago</label><br>
+    </strong>
 </div>
 
-<a class="btn btn-primary btn-block" asp-controller="Usuario" asp-action="Index" role="button">Voltar</a>
-<a class="btn btn-danger btn-block"  asp-controller="Usuario" asp-action="Apagar" asp-route-id="" role="button">Confirmar</a>
+<a class="btn btn-primary btn-block" asp-controller="Quarto" asp-action="Detalhes" asp-route-id="@Model.id_quarto" role="button">Voltar</a>
+<a class="btn btn-danger btn-block"  asp-controller="Usuario" asp-action="Apagar" asp-route-id="@Model.id_quarto" role="button">Confirmar</a>
