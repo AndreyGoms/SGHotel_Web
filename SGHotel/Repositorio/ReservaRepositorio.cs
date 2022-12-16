@@ -68,7 +68,57 @@ namespace SGHotel.Repositorio
             if (ListarPorId(reserva.id_Reserva) == null)
                 throw new Exception("reserva não encontrada");
 
+            _Context.Reservas.Remove(reserva);
+            _Context.SaveChanges();
+
             return true;
         }
+
+        public List<Limpeza> quartos_limpeza()
+        {
+
+            var reservas_fim_hoje = _Context.Reservas.Where(x=> x.dt_fim.Date == DateTime.Today).ToList();
+
+
+            QuartoRepositorio quartoRepositorio = new QuartoRepositorio(_Context);
+            ClienteRepositorio clienteRepositorio = new ClienteRepositorio(_Context);
+            List<Limpeza> lista_de_limpeza = new List<Limpeza>();
+            
+           
+            List<QuartoModel> lista_quartos = quartoRepositorio.BuscaTodos();
+
+
+            foreach (var reserva in reservas_fim_hoje)
+            {
+                foreach (var quarto in lista_quartos)
+                {
+                    if((reserva.id_quarto == quarto.Id_Quarto) && (!quarto.Limpo))
+                    {
+                        Limpeza obj_limpeza = new Limpeza();
+                        var cliente = clienteRepositorio.ListarPorId(reserva.id_cliente);
+                        
+                        obj_limpeza.Num_quarto = quarto.Num_quarto;
+                        obj_limpeza.dt_saida = reserva.dt_fim;
+                        obj_limpeza.Nome_Cliente = cliente.Nome;
+                        obj_limpeza.id_quarto = quarto.Id_Quarto;
+
+                        lista_de_limpeza.Add(obj_limpeza);
+                    } 
+                    else if(!quarto.Limpo)
+                    {
+                        Limpeza obj_limpeza = new Limpeza();
+                        obj_limpeza.Num_quarto = quarto.Num_quarto;
+                        obj_limpeza.dt_saida = DateTime.Today;
+                        obj_limpeza.Nome_Cliente = "Solicitação de limpeza";
+                        obj_limpeza.id_quarto = quarto.Id_Quarto;
+                        lista_de_limpeza.Add(obj_limpeza);
+                    }
+                }
+            }
+
+
+            return lista_de_limpeza;
+        }
+
     }
 }

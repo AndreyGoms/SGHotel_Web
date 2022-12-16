@@ -9,7 +9,9 @@ namespace SGHotel.Repositorio
         public List<QuartoModel> BuscaTodos();
         public bool Atualiza_Status(QuartoModel quarto);
         QuartoModel Adicionar(QuartoModel quarto);
-        QuartoModel Atualizar(QuartoModel quarto);       
+        QuartoModel Atualizar(QuartoModel quarto);
+        public bool Limpar(int id_quarto);
+        public bool Sujar(int id_quarto);
         public bool Apagar(int id_quarto);
     }
 }

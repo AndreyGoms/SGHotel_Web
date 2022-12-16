@@ -9,6 +9,7 @@ namespace SGHotel.Repositorio
         public ContaModel ListarPorId(int id);
         public ContaModel Criar(ContaModel conta);
         public ContaModel Editar(ContaModel conta);
+        public bool Cancelar(ContaModel conta_cancelar);
         public bool Apagar(ContaModel conta);
     }
 }

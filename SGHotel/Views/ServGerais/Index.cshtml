@@ -1,0 +1,37 @@
+﻿@model List<Limpeza>
+@{
+    ViewData["Title"] = "Limpeza de Quartos";  
+}
+
+<div class="text-center">
+    <h1 class="display-4">Serviços Gerais</h1> 
+    <br />
+    <br />
+    <label style="font-size:30px; float:left"><strong>Quartos a serem limpos:</strong></label>    
+    <table class="table table-striped "style="width:80%" id="Tabela-Clientes">
+        <thead>
+        <tr>          
+            <th scope="col" style="text-align:center">Quarto</th>          
+            <th scope="col" style="text-align:center">Data de saída</th>          
+            <th scope="col" style="text-align:center">Cliente</th>          
+            <th scope="col" style="text-align:center">Ações</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var quartos in Model)
+                {                       
+                        <tr>                          
+                            <td>Quarto @quartos.Num_quarto</td>                          
+                            <td>@quartos.dt_saida</td>                          
+                            <td>@quartos.Nome_Cliente</td>                          
+                            <td>@Html.ActionLink("Limpar","limpeza", new {id_quarto=@quartos.id_quarto},new{@class = "btn btn-success"})</td>                          
+                        </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

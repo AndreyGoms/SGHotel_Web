@@ -84,7 +84,6 @@ namespace SGHotel.Repositorio
             return quarto_editado;
         }
 
-
         public bool Apagar(int id)
         {
             QuartoModel Quarto_Deletado = ListarPorId(id);
@@ -97,6 +96,36 @@ namespace SGHotel.Repositorio
 
             return true;
 
+        }
+
+        public bool Limpar(int id_quarto)
+        {
+            QuartoModel quarto_limpar = ListarPorId(id_quarto);
+
+            if (quarto_limpar == null)
+                throw new Exception("ID QUARTO VAZIO");
+
+            quarto_limpar.Limpo = true;
+
+            _context.Quartos.Update(quarto_limpar);
+            _context.SaveChanges();
+
+            return true;
+        }
+
+        public bool Sujar(int id_quarto)
+        {
+            QuartoModel quarto_limpar = ListarPorId(id_quarto);
+
+            if (quarto_limpar == null)
+                throw new Exception("ID QUARTO VAZIO");
+
+            quarto_limpar.Limpo = false;
+
+            _context.Quartos.Update(quarto_limpar);
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }

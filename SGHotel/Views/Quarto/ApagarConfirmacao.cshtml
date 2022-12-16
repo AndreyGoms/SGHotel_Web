@@ -8,19 +8,23 @@
     }
 </style>
 
-<div class="text-center">
-    <h1>ATENÇÃO</h1>
-    <label> Caso <strong>CONFIRME</strong>, esse registro será apagado e a conta referente a ela será Cancelada!</label>
-</div>
-<div>    
-    <h2>Dados da reserva</h2>
-    <strong>
-        <label class="dados">Data da Inicio: @Model.dt_inicio.ToShortDateString()</label><br>
-        <label class="dados">Data da Saída : @Model.dt_fim.ToShortDateString()</label><br>
-        <label class="dados">cliente       : @Model.id_cliente</label><br>
-        <label class="dados">Valor pago    : @Model.Valor_pago</label><br>
-    </strong>
-</div>
+<form  asp-controller="Reservas" asp-action="Cancela_Conta_Reserva"  method="post">
+        <div class="text-center">
+            <h1>ATENÇÃO</h1>
+            <label> Caso <strong>CONFIRME</strong>, esse registro será apagado e a conta referente a ela será Cancelada!</label>
+        </div>
+        <input type="hidden" asp-for="id_Reserva"/> 
+        <div>    
+            <h2>Dados da reserva</h2>
+            <strong>
+                <label class="dados">Data da Inicio: @Model.dt_inicio.ToShortDateString()</label><br>
+                <label class="dados">Data da Saída : @Model.dt_fim.ToShortDateString()</label><br>
+                <label class="dados">cliente       : @Model.Nome_Cliente</label><br>
+                <label class="dados">Valor pago    : @Model.Valor_pago</label><br>
+            </strong>
+        </div>
+        <a class="btn btn-primary btn-block" asp-controller="Quarto" asp-action="Detalhes" asp-route-id="@Model.id_quarto" role="button">Voltar</a>
+        @*<a ttype="submit" class="btn btn-danger btn-block"  asp-controller="Reservas" asp-action="Cancela_Conta_Reserva" asp-route-id="@Model.id_Reserva" role="button">Confirmar</a>*@
+        <button type="submit" id="btnSalvarEdicao" class="btn btn-primary btn-block">Confirmar</button>
+</form>
 
-<a class="btn btn-primary btn-block" asp-controller="Quarto" asp-action="Detalhes" asp-route-id="@Model.id_quarto" role="button">Voltar</a>
-<a class="btn btn-danger btn-block"  asp-controller="Usuario" asp-action="Apagar" asp-route-id="@Model.id_quarto" role="button">Confirmar</a>

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SGHotel.Models.Data;
 
 namespace SGHotel.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    partial class BancoContextModelSnapshot : ModelSnapshot
+    [Migration("20221215044502_alteração tabela reservas")]
+    partial class alteraçãotabelareservas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,9 +142,6 @@ namespace SGHotel.Migrations
 
                     b.Property<DateTime>("dt_inicio")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("id_Conta")
-                        .HasColumnType("int");
 
                     b.Property<int>("id_cliente")
                         .HasColumnType("int");

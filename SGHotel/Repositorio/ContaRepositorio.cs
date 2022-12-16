@@ -64,5 +64,22 @@ namespace SGHotel.Repositorio
             return true;
         }
 
+        public bool Cancelar(ContaModel conta_cancelar)
+        {
+            ContaModel Cancelar = ListarPorId(conta_cancelar.IdConta);
+
+
+            if (ListarPorId(conta_cancelar.IdConta) == null)
+                return false;
+
+            Cancelar.tp_conta = "Cancelada";
+
+
+            _context.Contas.Update(Cancelar);
+            _context.SaveChanges();
+
+            return true;
+
+        }
     }
 }

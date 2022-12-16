@@ -13,5 +13,6 @@ namespace SGHotel.Models
         public string Nome_Cliente { get; set; }
         public int id_quarto { get; set; }
         public double Valor_pago { get; set; }
+        public int id_Conta { get; set; }
     }
 }

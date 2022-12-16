@@ -9,12 +9,13 @@
 
 <h1>Quarto @Model.Num_quarto</h1>
 
-<style>
-    a {
-        text-decoration:none;
-    }
-</style>
-
+@if(TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" style="float:right" arial-label="close">X</button>        
+        @TempData["MensagemErro"]
+    </div>     
+}
 <div style="display:inline-flex">  
     <hr />
     <dl class="column">
@@ -51,9 +52,7 @@
 </div>
 
 <div style="display:inline; float:right">
-     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Fazer Check-In
-     </button>
+     @Html.ActionLink("Solicitar limpeza","solicitar_limpeza",new { id_quarto=@Model.Id_Quarto}, new{@class = "btn btn-success"})
      <button class="botao-modal btn btn-primary" asp-route-id="@Model.Id_Quarto" >
          Nova Reserva
      </button>
@@ -102,22 +101,21 @@
                          }                                        
                         <td>
                             <div class="btn-group" role="group">
-                                <a role="button" class="btn btn-primary" asp-route-id="" asp-controller="Cliente" asp-action="Editar" >Editar</a>
-                                <a role="button" class="btn btn-primary" asp-route-id="id_reserva=@reserva_item.id_Reserva" asp-controller="Quarto" asp-action="ApagarConfirmacao">
-                                        Apagar
-                                </a>       
-                                
-                                <button class="btn btn-danger">
-                                   @Html.ActionLink("Apagar","ApagarConfirmacao", new { id_reserva=@reserva_item.id_Reserva })
-                                </button>                               
+                                <a role="button" class="btn btn-primary" asp-route-id="" asp-controller="Cliente" asp-action="Editar" >Editar</a>                                                                    
+                                @Html.ActionLink("Apagar","ApagarConfirmacao", new { id_reserva=@reserva_item.id_Reserva }, new{@class = "btn btn-danger"})                               
                                                                         
                                 @if (Model.Disponivel)
                                 {
-                                                <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Check-In</button>
+                                        <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Check-In</button>
                                 }
                                 else if (!Model.Disponivel)
-                                {
-                                                <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Check-Out</button>                                                                            
+                                {                                                
+                                        @Html.ActionLink(
+                                            "Check-Out",
+                                            "Check_In_Out",
+                                            new {id_reserva=@reserva_item.id_Reserva, id_quarto=@Model.Id_Quarto} ,
+                                            new{@class = "btn btn-primary"}                                                                                                       
+                                        )
                                 }
                             </div>
                         </td>                       
@@ -132,6 +130,7 @@
 @*=============================*@
 @*MODAL CADASTRO DE RESERVA*@
 @*=============================*@
+
 <div id="modal-reserva" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -151,18 +150,18 @@
                         @{
                             foreach (var item in Model.Clientes)
                             {                                                          
-                                                           <option value="@item.Id">@item.Nome</option>                                                                    
+                                 <option value="@item.Id">@item.Nome</option>                                                                    
                             }                            
                         }
                     </select>            
               </div>
               <div class="form-group">
                     <label for="dt_vencimento">Data de Inicio</label>
-                    <input type="date" asp-for="@reserva.dt_inicio" class="form-control" placeholder="Data de início">                
+                    <input type="datetime-local" asp-for="@reserva.dt_inicio" class="form-control" placeholder="Data de início">                
               </div> 
               <div class="form-group">
                     <label for="dt_vencimento">Data de Fim</label>
-                    <input type="date" asp-for="@reserva.dt_fim" class="form-control" placeholder="Data de fim">                
+                    <input type="datetime-local" asp-for="@reserva.dt_fim" class="form-control" placeholder="Data de fim">                
               </div> 
               <div style="visibility:hidden">
                     <input type="number" asp-for="@reserva.id_quarto" value="@Model.Id_Quarto" class="form-control">                
@@ -174,8 +173,7 @@
 
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Salvar</button>
-                  @*<button type="submit" class="btn btn-primary" asp-controller="Quarto" asp-action="Detalhes" asp-route-id="@Model.Id_Quarto">Salvar</button>*@
+                  <button type="submit" id="btnSalvar" class="btn btn-primary btn-block">Salvar</button>                  
               </div>
         </form>
       </div> 

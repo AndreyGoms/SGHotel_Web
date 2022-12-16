@@ -11,6 +11,6 @@ namespace SGHotel.Models
         public double Valor_Conta { get; set; }
         public DateTime dt_lancamento { get; set; }
         public DateTime dt_vencimento { get; set; }
-        public string tp_conta { get; set; }
+        public string tp_conta { get; set; }        
     }
 }
